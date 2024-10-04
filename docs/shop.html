@@ -9,12 +9,12 @@
 </head>
 <body class="bg-gray-100">
     <!-- Menú Superior -->
-    <header class="bg-blue-600 text-white p-4 flex items-center">
-        <div class="flex items-center">
+    <header class="bg-blue-600 text-white p-4 flex flex-col md:flex-row items-center justify-between">
+        <div class="flex items-center mb-2 md:mb-0">
             <img src="logo.png" alt="Logo" class="h-10 w-10 mr-2"> <!-- Asegúrate de tener un logo en esta ruta -->
-            <h1 class="text-2xl font-bold">Tienda E-commerce</h1>
+            <h1 class="text-xl md:text-2xl font-bold">Tienda E-commerce</h1>
         </div>
-        <nav class="ml-auto flex items-center space-x-6">
+        <nav class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
             <a href="index.html" class="hover:underline">Inicio</a>
             <a href="shop.html" class="hover:underline">Productos</a>
             <div class="relative">
@@ -29,9 +29,14 @@
         </nav>
     </header>
 
+    <!-- Banner/Slider -->
+    <section class="my-4">
+        <img src="./img/banner.jpeg" alt="Banner" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+    </section>
+
     <!-- Filtros y Opciones de Visualización -->
-    <section class="p-4 flex justify-between items-center">
-        <div>
+    <section class="p-4 flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
             <label for="category-filter" class="mr-2">Filtrar por categoría:</label>
             <select id="category-filter" class="p-2 rounded">
                 <option value="all">Todos</option>
@@ -41,7 +46,7 @@
                 <option value="juguetes">Juguetes</option>
             </select>
         </div>
-        <div>
+        <div class="mb-4 md:mb-0">
             <label for="sort-options" class="mr-2">Ordenar por:</label>
             <select id="sort-options" class="p-2 rounded">
                 <option value="default">Predeterminado</option>
@@ -50,7 +55,7 @@
                 <option value="name">Nombre</option>
             </select>
         </div>
-        <div>
+        <div class="flex space-x-2">
             <button id="grid-view" class="bg-blue-500 text-white px-4 py-2 rounded">Rejilla</button>
             <button id="list-view" class="bg-blue-500 text-white px-4 py-2 rounded">Lista</button>
         </div>
@@ -58,8 +63,8 @@
 
     <!-- Listado de Productos -->
     <main class="p-4">
-        <h2 class="text-2xl mb-4">Productos Destacados</h2>
-        <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <h2 class="text-xl md:text-2xl mb-4">Productos Destacados</h2>
+        <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <!-- Los productos se agregarán aquí dinámicamente -->
         </div>
         <div class="flex justify-center mt-4">
@@ -67,15 +72,6 @@
             <button id="next-page" class="bg-gray-300 px-4 py-2 rounded">Siguiente</button>
         </div>
     </main>
-
-    <!-- Resumen de Compra -->
-    <section class="p-4 bg-gray-200 rounded mt-4">
-        <h2 class="text-xl mb-2">Resumen de Compra</h2>
-        <p id="total-products">Cantidad de Productos: 0</p>
-        <p id="subtotal">Subtotal: $0.00</p>
-        <p id="shipping-cost">Costo de Envío: $5.00</p>
-        <p id="total">Total: $0.00</p>
-    </section>
 
     <!-- Pie de Página -->
     <footer class="bg-blue-600 text-white p-4 text-center">

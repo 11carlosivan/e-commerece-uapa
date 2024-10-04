@@ -56,25 +56,44 @@
             <!-- Los productos del carrito se agregarán aquí dinámicamente -->
         </div>
 
+        <h4 class="font-bold mt-4">Total a Pagar: <span id="total-amount"></span></h4>
+
+        <button id="guardar-datos">Guardar Datos del Cliente</button>
         <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4" onclick="confirmOrder()">Confirmar Pedido</button>
     </main>
 
-    <!-- Pie de Página -->
+    <script>
+        // Función para cargar los datos del carrito desde localStorage
+        function loadCartData() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const total = localStorage.getItem('total');
+
+            // Mostrar los datos en el resumen del pedido
+            let orderSummaryHTML = '';
+            cartItems.forEach(item => {
+                orderSummaryHTML += `
+                    <div class="cart-item border-b py-2">
+                        <h4>${item.name}</h4>
+                        <p>Precio: $${item.price.toFixed(2)}</p>
+                        <p>Cantidad: ${item.quantity}</p>
+                        <img src="${item.image}" alt="${item.name}" class="h-16 w-16 object-cover">
+                    </div>
+                `;
+            });
+
+            document.getElementById('order-summary').innerHTML = orderSummaryHTML;
+            document.getElementById('total-amount').innerText = `$${total}`;
+        }
+
+        // Llama a esta función al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCartData(); // Carga los datos del carrito al cargar
+        });
+    </script>
+
     <footer class="bg-blue-600 text-white p-4 text-center">
         <p>&copy; 2023 Tienda E-commerce</p>
         <p>Contacto: info@tienda.com</p>
     </footer>
-
-    <!-- Agregar un modal para la simulación de pago -->
-    <div id="payment-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
-        <div class="bg-white p-4 rounded shadow">
-            <h2 class="text-xl mb-4">Confirmar Pago</h2>
-            <p>¿Está seguro de que desea proceder con el pago?</p>
-            <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4" onclick="confirmPayment()">Confirmar</button>
-            <button class="bg-red-500 text-white px-4 py-2 rounded mt-4" onclick="closeModal()">Cancelar</button>
-        </div>
-    </div>
-
-    <script src="checkout.js"></script>
 </body>
 </html>

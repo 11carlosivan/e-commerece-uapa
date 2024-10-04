@@ -51,5 +51,18 @@
     </footer>
 
     <script src="order-confirmation.js"></script>
+    <script>
+        // Función para actualizar el contador del carrito
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        // Llama a esta función al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount(); // Actualiza el contador del carrito al cargar
+        });
+    </script>
 </body>
 </html>

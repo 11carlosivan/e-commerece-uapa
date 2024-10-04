@@ -9,12 +9,12 @@
 </head>
 <body class="bg-gray-100">
     <!-- Menú Superior -->
-    <header class="bg-blue-600 text-white p-4 flex items-center">
-        <div class="flex items-center">
+    <header class="bg-blue-600 text-white p-4 flex flex-col md:flex-row items-center justify-between">
+        <div class="flex items-center mb-2 md:mb-0">
             <img src="logo.png" alt="Logo" class="h-10 w-10 mr-2"> <!-- Asegúrate de tener un logo en esta ruta -->
             <h1 class="text-2xl font-bold">Tienda E-commerce</h1>
         </div>
-        <nav class="ml-auto flex items-center space-x-6">
+        <nav class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
             <a href="index.html" class="hover:underline">Inicio</a>
             <a href="shop.html" class="hover:underline">Productos</a>
             <div class="relative">
@@ -31,12 +31,12 @@
 
     <!-- Banner/Slider -->
     <section class="my-4">
-        <img src="./img/banner.jpeg" alt="Banner" class="w-full h-64 object-cover">
+        <img src="./img/banner.jpeg" alt="Banner" class="w-full h-64 object-cover rounded-lg shadow-md">
     </section>
     <!-- Listado de Productos -->
     <main class="p-4">
         <h2 class="text-2xl mb-4">Productos Destacados</h2>
-        <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <!-- Los productos se agregarán aquí dinámicamente -->
         </div>
     </main>

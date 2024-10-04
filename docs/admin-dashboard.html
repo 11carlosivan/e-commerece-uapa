@@ -9,12 +9,12 @@
 </head>
 <body class="bg-gray-100">
     <!-- Encabezado -->
-    <header class="bg-blue-600 text-white p-4 flex items-center">
-        <div class="flex items-center">
+    <header class="bg-blue-600 text-white p-4 flex flex-col md:flex-row items-center justify-between">
+        <div class="flex items-center mb-2 md:mb-0">
             <img src="logo.png" alt="Logo" class="h-10 w-10 mr-2"> <!-- Asegúrate de tener un logo en esta ruta -->
-            <h1 class="text-2xl font-bold">Tienda E-commerce</h1>
+            <h1 class="text-xl md:text-2xl font-bold">Tienda E-commerce</h1>
         </div>
-        <nav class="ml-auto flex items-center space-x-6">
+        <nav class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
             <a href="index.html" class="hover:underline">Inicio</a>
             <a href="shop.html" class="hover:underline">Productos</a>
             <div class="relative">
@@ -31,10 +31,10 @@
 
     <!-- Navegación del Dashboard -->
     <nav class="p-4">
-        <ul class="flex space-x-4">
-            <li><button onclick="showSection('products')" class="bg-blue-500 text-white px-4 py-2 rounded">Gestión de Productos</button></li>
-            <li><button onclick="showSection('orders')" class="bg-blue-500 text-white px-4 py-2 rounded">Gestión de Pedidos</button></li>
-            <li><button onclick="showSection('users')" class="bg-blue-500 text-white px-4 py-2 rounded">Gestión de Usuarios</button></li>
+        <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+            <li><button onclick="showSection('products')" class="bg-blue-500 text-white px-4 py-2 rounded w-full md:w-auto">Gestión de Productos</button></li>
+            <li><button onclick="showSection('orders')" class="bg-blue-500 text-white px-4 py-2 rounded w-full md:w-auto">Gestión de Pedidos</button></li>
+            <li><button onclick="showSection('users')" class="bg-blue-500 text-white px-4 py-2 rounded w-full md:w-auto">Gestión de Usuarios</button></li>
         </ul>
     </nav>
 
@@ -42,13 +42,13 @@
     <main class="p-4">
         <div id="products" class="section hidden">
             <h2 class="text-xl mb-4">Gestión de Productos</h2>
-            <form id="product-form" class="mb-4">
+            <form id="product-form" class="mb-4 space-y-2">
                 <input type="text" id="product-name" placeholder="Nombre del Producto" required class="border p-2 w-full rounded">
-                <input type="number" id="product-price" placeholder="Precio" required class="border p-2 w-full rounded mt-2">
-                <input type="number" id="product-quantity" placeholder="Cantidad" required class="border p-2 w-full rounded mt-2">
-                <input type="text" id="product-description" placeholder="Descripción" required class="border p-2 w-full rounded mt-2">
-                <input type="text" id="product-image" placeholder="URL de la Imagen" required class="border p-2 w-full rounded mt-2">
-                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded mt-2">Agregar Producto</button>
+                <input type="number" id="product-price" placeholder="Precio" required class="border p-2 w-full rounded">
+                <input type="number" id="product-quantity" placeholder="Cantidad" required class="border p-2 w-full rounded">
+                <input type="text" id="product-description" placeholder="Descripción" required class="border p-2 w-full rounded">
+                <input type="text" id="product-image" placeholder="URL de la Imagen" required class="border p-2 w-full rounded">
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded w-full">Agregar Producto</button>
             </form>
             <div id="product-list" class="space-y-2">
                 <!-- Los productos se agregarán aquí dinámicamente -->
@@ -76,5 +76,18 @@
     </footer>
 
     <script src="admin-dashboard.js"></script>
+    <script>
+        // Función para actualizar el contador del carrito
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        // Llama a esta función al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount(); // Actualiza el contador del carrito al cargar
+        });
+    </script>
 </body>
 </html>
