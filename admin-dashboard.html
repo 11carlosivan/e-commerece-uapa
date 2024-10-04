@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Dashboard del Administrador</title>
+</head>
+<body class="bg-gray-100">
+    <!-- Encabezado -->
+    <header class="bg-blue-600 text-white p-4 flex items-center">
+        <div class="flex items-center">
+            <img src="logo.png" alt="Logo" class="h-10 w-10 mr-2"> <!-- Asegúrate de tener un logo en esta ruta -->
+            <h1 class="text-2xl font-bold">Tienda E-commerce</h1>
+        </div>
+        <nav class="ml-auto flex items-center space-x-6">
+            <a href="index.html" class="hover:underline">Inicio</a>
+            <a href="shop.html" class="hover:underline">Productos</a>
+            <div class="relative">
+                <a href="cart.html" class="hover:underline flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-1.5 9H5.25L3 3z" />
+                    </svg>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-1 text-xs">0</span>
+                </a>
+            </div>
+            <a href="login-signup.html" class="hover:underline">Iniciar Sesión</a>
+        </nav>
+    </header>
+
+    <!-- Navegación del Dashboard -->
+    <nav class="p-4">
+        <ul class="flex space-x-4">
+            <li><button onclick="showSection('products')" class="bg-blue-500 text-white px-4 py-2 rounded">Gestión de Productos</button></li>
+            <li><button onclick="showSection('orders')" class="bg-blue-500 text-white px-4 py-2 rounded">Gestión de Pedidos</button></li>
+            <li><button onclick="showSection('users')" class="bg-blue-500 text-white px-4 py-2 rounded">Gestión de Usuarios</button></li>
+        </ul>
+    </nav>
+
+    <!-- Secciones del Dashboard -->
+    <main class="p-4">
+        <div id="products" class="section hidden">
+            <h2 class="text-xl mb-4">Gestión de Productos</h2>
+            <form id="product-form" class="mb-4">
+                <input type="text" id="product-name" placeholder="Nombre del Producto" required class="border p-2 w-full rounded">
+                <input type="number" id="product-price" placeholder="Precio" required class="border p-2 w-full rounded mt-2">
+                <input type="number" id="product-quantity" placeholder="Cantidad" required class="border p-2 w-full rounded mt-2">
+                <input type="text" id="product-description" placeholder="Descripción" required class="border p-2 w-full rounded mt-2">
+                <input type="text" id="product-image" placeholder="URL de la Imagen" required class="border p-2 w-full rounded mt-2">
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded mt-2">Agregar Producto</button>
+            </form>
+            <div id="product-list" class="space-y-2">
+                <!-- Los productos se agregarán aquí dinámicamente -->
+            </div>
+        </div>
+
+        <div id="orders" class="section hidden">
+            <h2 class="text-xl mb-4">Gestión de Pedidos</h2>
+            <div id="order-list" class="space-y-2">
+                <!-- Los pedidos se agregarán aquí dinámicamente -->
+            </div>
+        </div>
+
+        <div id="users" class="section hidden">
+            <h2 class="text-xl mb-4">Gestión de Usuarios</h2>
+            <div id="user-list" class="space-y-2">
+                <!-- Los usuarios se agregarán aquí dinámicamente -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="bg-blue-600 text-white p-4 text-center">
+        <p>&copy; 2023 Tienda E-commerce</p>
+    </footer>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Tienda E-commerce - Carrito de Compras</title>
+</head>
+<body class="bg-gray-100">
+    <!-- Encabezado -->
+    <header class="bg-blue-600 text-white p-4 flex items-center">
+        <div class="flex items-center">
+            <img src="logo.png" alt="Logo" class="h-10 w-10 mr-2"> <!-- Asegúrate de tener un logo en esta ruta -->
+            <h1 class="text-2xl font-bold">Tienda E-commerce</h1>
+        </div>
+        <nav class="ml-auto flex items-center space-x-6">
+            <a href="index.html" class="hover:underline">Inicio</a>
+            <a href="shop.html" class="hover:underline">Productos</a>
+            <div class="relative">
+                <a href="cart.html" class="hover:underline flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-1.5 9H5.25L3 3z" />
+                    </svg>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-1 text-xs">0</span>
+                </a>
+            </div>
+            <a href="login-signup.html" class="hover:underline">Iniciar Sesión</a>
+        </nav>
+    </header>
+
+    <!-- Lista de Productos en el Carrito -->
+    <main class="p-4">
+        <h2 class="text-2xl mb-4">Carrito de Compras</h2>
+        <div id="cart-items" class="space-y-4">
+            <!-- Los productos del carrito se agregarán aquí dinámicamente -->
+        </div>
+
+        <div class="mt-4">
+            <h3 class="text-xl">Resumen de Compra</h3>
+            <div id="summary" class="bg-gray-200 p-4 rounded mt-2">
+                <p>Subtotal: $<span id="subtotal">0</span></p>
+                <p>Costos de Envío: $<span id="shipping">5</span></p>
+                <p>Total: $<span id="total">0</span></p>
+            </div>
+        </div>
+
+        <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4" onclick="proceedToCheckout()">Proceder al Pago</button>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="bg-blue-600 text-white p-4 text-center">
+        <p>&copy; 2023 Tienda E-commerce</p>
+        <p>Contacto: info@tienda.com</p>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html>

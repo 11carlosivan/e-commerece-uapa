@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Tienda E-commerce - Productos</title>
+</head>
+<body class="bg-gray-100">
+    <!-- Menú Superior -->
+    <header class="bg-blue-600 text-white p-4 flex items-center">
+        <div class="flex items-center">
+            <img src="logo.png" alt="Logo" class="h-10 w-10 mr-2"> <!-- Asegúrate de tener un logo en esta ruta -->
+            <h1 class="text-2xl font-bold">Tienda E-commerce</h1>
+        </div>
+        <nav class="ml-auto flex items-center space-x-6">
+            <a href="index.html" class="hover:underline">Inicio</a>
+            <a href="shop.html" class="hover:underline">Productos</a>
+            <div class="relative">
+                <a href="cart.html" class="hover:underline flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-1.5 9H5.25L3 3z" />
+                    </svg>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-1 text-xs">0</span>
+                </a>
+            </div>
+            <a href="login-signup.html" class="hover:underline">Iniciar Sesión</a>
+        </nav>
+    </header>
+
+    <!-- Filtros y Opciones de Visualización -->
+    <section class="p-4 flex justify-between items-center">
+        <div>
+            <label for="category-filter" class="mr-2">Filtrar por categoría:</label>
+            <select id="category-filter" class="p-2 rounded">
+                <option value="all">Todos</option>
+                <option value="ropa">Ropa</option>
+                <option value="electronica">Electrónica</option>
+                <option value="hogar">Hogar</option>
+                <option value="juguetes">Juguetes</option>
+            </select>
+        </div>
+        <div>
+            <label for="sort-options" class="mr-2">Ordenar por:</label>
+            <select id="sort-options" class="p-2 rounded">
+                <option value="default">Predeterminado</option>
+                <option value="price-asc">Precio: Bajo a Alto</option>
+                <option value="price-desc">Precio: Alto a Bajo</option>
+                <option value="name">Nombre</option>
+            </select>
+        </div>
+        <div>
+            <button id="grid-view" class="bg-blue-500 text-white px-4 py-2 rounded">Rejilla</button>
+            <button id="list-view" class="bg-blue-500 text-white px-4 py-2 rounded">Lista</button>
+        </div>
+    </section>
+
+    <!-- Listado de Productos -->
+    <main class="p-4">
+        <h2 class="text-2xl mb-4">Productos Destacados</h2>
+        <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Los productos se agregarán aquí dinámicamente -->
+        </div>
+        <div class="flex justify-center mt-4">
+            <button id="prev-page" class="bg-gray-300 px-4 py-2 rounded" disabled>Anterior</button>
+            <button id="next-page" class="bg-gray-300 px-4 py-2 rounded">Siguiente</button>
+        </div>
+    </main>
+
+    <!-- Resumen de Compra -->
+    <section class="p-4 bg-gray-200 rounded mt-4">
+        <h2 class="text-xl mb-2">Resumen de Compra</h2>
+        <p id="total-products">Cantidad de Productos: 0</p>
+        <p id="subtotal">Subtotal: $0.00</p>
+        <p id="shipping-cost">Costo de Envío: $5.00</p>
+        <p id="total">Total: $0.00</p>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer class="bg-blue-600 text-white p-4 text-center">
+        <p>&copy; 2023 Tienda E-commerce</p>
+    </footer>
+
+    <script src="shop.js"></script> <!-- Usar el mismo script para cargar productos -->
+    <script>
+        // Función para actualizar el contador del carrito
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        // Función para calcular el resumen de compra
+        function updatePurchaseSummary() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const shippingCost = 5.00; // Costo de envío fijo
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const total = subtotal + shippingCost;
+            const totalProducts = cart.reduce((total, item) => total + item.quantity, 0);
+
+            document.getElementById('subtotal').innerText = `Subtotal: $${subtotal.toFixed(2)}`;
+            document.getElementById('total').innerText = `Total: $${total.toFixed(2)}`;
+            document.getElementById('shipping-cost').innerText = `Costo de Envío: $${shippingCost.toFixed(2)}`;
+            document.getElementById('total-products').innerText = `Cantidad de Productos: ${totalProducts}`;
+        }
+
+        // Llama a esta función al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            displayProducts();
+            updateCartCount(); // Actualiza el contador del carrito al cargar
+            updatePurchaseSummary(); // Actualiza el resumen de compra al cargar
+        });
+    </script>
+</body>
+</html>
