@@ -8,7 +8,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     if (email === "usuario@ejemplo.com" && password === "contraseña") {
         alert("Inicio de sesión exitoso. Bienvenido!");
         // Redirigir a la página principal o a otra página
-        window.location.href = "index.html"; // Cambia esto a la página deseada
+        window.location.href = "admin-dashboard.html"; // Cambia esto a la página deseada
     } else {
         alert("Correo electrónico o contraseña incorrectos.");
     }
