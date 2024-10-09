@@ -33,10 +33,10 @@
     <main class="p-4">
         <h2 class="text-2xl mb-4">Datos del Comprador</h2>
         <form id="checkout-form" class="space-y-4">
-            <input type="text" placeholder="Nombre Completo" required class="border p-2 w-full rounded">
-            <input type="text" placeholder="Dirección" required class="border p-2 w-full rounded">
-            <input type="email" placeholder="Correo Electrónico" required class="border p-2 w-full rounded">
-            <input type="tel" placeholder="Teléfono" required class="border p-2 w-full rounded">
+            <input id="name" type="text" placeholder="Nombre Completo" required class="border p-2 w-full rounded">
+            <input id="address" type="text" placeholder="Dirección" required class="border p-2 w-full rounded">
+            <input id="mail" type="email" placeholder="Correo Electrónico" required class="border p-2 w-full rounded">
+            <input id="phone" type="tel" placeholder="Teléfono" required class="border p-2 w-full rounded">
         </form>
 
         <h2 class="text-2xl mt-6 mb-4">Método de Pago</h2>
@@ -56,33 +56,71 @@
             <!-- Los productos del carrito se agregarán aquí dinámicamente -->
         </div>
 
-        <h4 class="font-bold mt-4">Total a Pagar: <span id="total-amount"></span></h4>
-
-        <button id="guardar-datos">Guardar Datos del Cliente</button>
-        <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4" onclick="confirmOrder()">Confirmar Pedido</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4" onclick="setClientData()">Confirmar Pedido</button>
     </main>
 
     <script>
         // Función para cargar los datos del carrito desde localStorage
+        // Función para cargar los datos del carrito desde localStorage
         function loadCartData() {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             const total = localStorage.getItem('total');
 
             // Mostrar los datos en el resumen del pedido
             let orderSummaryHTML = '';
+            let totalAmount = 0; // Inicializa el total acumulado
+            let totalQuantity = 0; // Inicializa la cantidad total de productos
+
             cartItems.forEach(item => {
+                const itemTotal = item.price * item.quantity; // Calcula el total por item
+                totalAmount += itemTotal; // Acumula el total
+                totalQuantity += item.quantity; // Acumula la cantidad total
+
                 orderSummaryHTML += `
                     <div class="cart-item border-b py-2">
                         <h4>${item.name}</h4>
                         <p>Precio: $${item.price.toFixed(2)}</p>
                         <p>Cantidad: ${item.quantity}</p>
+                        <p>Total por producto: $${itemTotal.toFixed(2)}</p> <!-- Muestra el total por producto -->
                         <img src="${item.image}" alt="${item.name}" class="h-16 w-16 object-cover">
                     </div>
                 `;
             });
 
+            // Muestra la cantidad total de productos y el total acumulado
+            orderSummaryHTML += `
+                <div class="border-t pt-2">
+                    <h4 class="font-bold">Cantidad Total de Productos: ${totalQuantity}</h4>
+                    <h4 class="font-bold">Total a Pagar: $${totalAmount.toFixed(2)}</h4>
+                </div>
+            `;
+
             document.getElementById('order-summary').innerHTML = orderSummaryHTML;
-            document.getElementById('total-amount').innerText = `$${total}`;
+        }
+
+        const setClientData = () => {
+
+            const name = document.getElementById('name').value
+            const address = document.getElementById('address').value
+            const mail = document.getElementById('mail').value
+            const phone = document.getElementById('phone').value
+            const method = document.querySelector('input[name="payment-method"]:checked').value
+
+            if(name <= 0, address <= 0, mail <= 0, phone <= 0){
+                alert("Todos los campos son obligatorios")
+                return false
+            }
+
+            const clientData = [{name, address, mail, phone, method}]
+
+            if(!localStorage.getItem('clientData')){
+
+                localStorage.setItem('clientData', JSON.stringify(clientData))
+                window.location.href = "./order-confirm.html"
+            }
+            else{
+                alert("clientData ya existe")
+            }
         }
 
         // Llama a esta función al cargar la página

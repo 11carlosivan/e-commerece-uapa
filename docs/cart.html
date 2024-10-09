@@ -72,27 +72,6 @@
     <script src="cart.js"></script>
     <script>
         function proceedToCheckout() {
-            const cartItems = [
-                {
-                    name: "Producto 1",
-                    price: 10.00,
-                    quantity: 2,
-                    image: "ruta/a/la/imagen1.jpg"
-                },
-                {
-                    name: "Producto 2",
-                    price: 15.00,
-                    quantity: 1,
-                    image: "ruta/a/la/imagen2.jpg"
-                }
-            ]; // Aquí deberías obtener los datos reales de tu carrito
-
-            const total = 40.00; // Cambia esto por el total real
-
-            // Almacenar la información en localStorage
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            localStorage.setItem('total', total);
-
             // Redirigir a la página de checkout
             window.location.href = 'checkout.html';
         }
